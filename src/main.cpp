@@ -3,17 +3,20 @@
 #define OLC_PGE_APPLICATION
 #include <olcPixelGameEngine.h>
 
+#include "dungeon.hpp"
+
 class Game : public olc::PixelGameEngine
 {
 public:
     Game()
+        : mDungeon(new Dungeon(this))
     {
 
     }
 
     ~Game()
     {
-
+        delete mDungeon;
     }
 
     bool OnUserCreate() override
@@ -25,7 +28,8 @@ public:
     {
         Clear(olc::BLACK);
 
-        DrawRect( { 100, 100 }, { 10, 10 }, olc::RED );
+        mDungeon->Update();
+        mDungeon->Draw();
 
         return true;
     }
@@ -35,6 +39,8 @@ public:
         return true;
     }
 
+private:
+    Dungeon* mDungeon;
 };
 
 
