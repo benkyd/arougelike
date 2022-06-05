@@ -11,7 +11,7 @@ public:
     Game()
         : mDungeon(new Dungeon(this))
     {
-
+        sAppName = "Arogus";
     }
 
     ~Game()
