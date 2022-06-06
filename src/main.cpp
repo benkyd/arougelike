@@ -47,8 +47,11 @@ private:
 
 int main(int* argc, char** argv) 
 {
-    Engine::GetInstance().pge.Construct( 980, 720, 1, 1, false, false );
-    Engine::GetInstance().pge.Start();
+    Game aRogueLike;
+    
+
+    aRogueLike.Construct( 980, 720, 1, 1, false, false );
+    aRogueLike.Start();
 
     return 0;
 }
