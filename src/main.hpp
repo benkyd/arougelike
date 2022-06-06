@@ -6,7 +6,7 @@ class Engine
 {
 public:
 	Engine( olc::PixelGameEngine engine )
-		: engine( engine )
+		: pge()
 	{
 
 	}
@@ -17,12 +17,12 @@ public:
 		return instance;
 	}
 
-	olc::PixelGameEngine engine;
+	olc::PixelGameEngine pge;
 
 	Engine( Engine const& ) = delete;
 	void operator=( Engine const& ) = delete;
 
 protected:
-	Singleton() = default;
+	Engine() = default;
 };
 

@@ -3,6 +3,7 @@
 #define OLC_PGE_APPLICATION
 #include <olcPixelGameEngine.h>
 
+#include "main.hpp"
 #include "dungeon.hpp"
 
 class Game : public olc::PixelGameEngine
@@ -46,10 +47,8 @@ private:
 
 int main(int* argc, char** argv) 
 {
-    Game aRogueLike;
-
-    aRogueLike.Construct( 980, 720, 1, 1, false, false );
-    aRogueLike.Start();
+    Engine::GetInstance().pge.Construct( 980, 720, 1, 1, false, false );
+    Engine::GetInstance().pge.Start();
 
     return 0;
 }
