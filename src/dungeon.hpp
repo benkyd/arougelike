@@ -8,9 +8,11 @@ class Player;
 struct Tile
 {
 	olc::vi2d Position;
-	inline void Draw(olc::PixelGameEngine* target) // needs screen space modifiers or camera shit
+	inline void Draw(olc::PixelGameEngine* target, olc::vf2d* targetCamera) // needs screen space modifiers or camera shit
 	{
-		target->FillRect( Position * 10, { 10, 10 } );
+		target->FillRect( olc::vf2d{ static_cast<float>(Position.x * 10) + targetCamera->x,
+									 static_cast<float>(Position.y * 10) + targetCamera->y },
+						  { 10, 10 } );
 	}
 };
 
@@ -21,7 +23,7 @@ public:
 	~Dungeon();
 
 	void Update();
-	void Draw();
+	void Draw(olc::vf2d* cameraPosition);
 
 protected:
 	olc::PixelGameEngine* mEngine;

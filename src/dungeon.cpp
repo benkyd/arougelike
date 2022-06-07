@@ -20,7 +20,7 @@ Dungeon::Dungeon( olc::PixelGameEngine* engine )
 
     // Starting at 0,0
     int directionChance = 5;
-    int roomChance = 5;
+    int roomChance = 2;
     int dungeonMinSize = 5000;
 
     struct Agent
@@ -99,10 +99,10 @@ void Dungeon::Update()
 
 }
 
-void Dungeon::Draw()
+void Dungeon::Draw(olc::vf2d* cameraPosition)
 {
 	for ( auto& tile : mWorld )
 	{
-		tile.Draw( mEngine );
+		tile.Draw( mEngine, cameraPosition );
 	}
 }

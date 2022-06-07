@@ -32,7 +32,7 @@ file(GLOB Source
 )
 
 include_directories(${arougelike}
-    "include/"
+    "include"
     ${WinSDK}
 )
 

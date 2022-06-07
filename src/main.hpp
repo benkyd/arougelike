@@ -25,4 +25,3 @@ public:
 protected:
 	Engine() = default;
 };
-
