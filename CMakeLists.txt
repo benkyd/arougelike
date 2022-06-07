@@ -1,20 +1,22 @@
 cmake_minimum_required(VERSION 3.7)
 project(arougelike)
 
-set(Executable output)
-set(SourceDir src) # Change src/ to your source directory
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
 
-set(IncludeDir include/) # Change include/ to your include directory
-include_directories(${IncludeDir})
-
-file(GLOB_RECURSE SourceFiles
-    ${SourceDir}/*.cpp
-)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 set(THREADS_PREFER_PTHREAD_FLAD ON)
 find_package(Threads REQUIRED)
 
+# Find GL and GLX package
+set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
+
+# Adds RESOURCES constant in C++
+add_definitions(-DRESOURCES="${CMAKE_SOURCE_DIR}/resources/")
+message(${CMAKE_SOURCE_DIR}/resources)
 
 if (UNIX)
     find_package(X11 REQUIRED)
@@ -22,29 +24,32 @@ if (UNIX)
     include_directories(${PNG_INCLUDE_DIR})
 endif (UNIX)
 
-if (WIN32)
-    include_directories(${WinSDK})
-endif (WIN32)
+set(arougelike arougelike)
 
-add_executable(${Executable} 
-    ${SourceFiles}
+file(GLOB Source
+    src/*.cpp
+    src/generation/*.cpp
 )
 
-link_libraries(${Executable}
-    Threads::Threads
-    OpenGL::OpenGL
-    OpenGL::GL
-    OpenGL::GLX
+include_directories(${arougelike}
+    "include/"
+    ${WinSDK}
+)
+
+add_executable(${arougelike}
+    ${Source} 
 )
 
 if (UNIX) 
-    target_link_libraries(${Executable} 
+    target_link_libraries(${arougelike} 
         ${X11_LIBRARIES}
         PNG::PNG
     )
 endif (UNIX)
-if (WIN32)
-    target_link_libraries(${Executable} 
-        ${WinSDK}
-    )
-endif (WIN32)
+
+target_link_libraries(${arougelike}
+    ${WinSDK}
+    Threads::Threads
+    OpenGL::GL
+)
+
