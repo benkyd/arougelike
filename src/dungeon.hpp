@@ -23,14 +23,15 @@ public:
 	~Dungeon();
 
 	void Update();
-	void Draw(olc::vf2d* cameraPosition);
+    void Move( olc::PixelGameEngine* engine );
+	void Draw();
 
 protected:
 	olc::PixelGameEngine* mEngine;
 
 private:
 	const int mDungeonSize = 100;
-
+    olc::vf2d mCameraPosition = {0.0f, 0.0f};
 	std::vector<Tile> mWorld;
 
 	// Player* mPlayer;

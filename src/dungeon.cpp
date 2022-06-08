@@ -99,10 +99,20 @@ void Dungeon::Update()
 
 }
 
-void Dungeon::Draw(olc::vf2d* cameraPosition)
+void Dungeon::Move( olc::PixelGameEngine* engine )
+{
+    engine->Clear(olc::BLACK);
+
+    if (engine->GetKey(olc::Key::A).bHeld) mCameraPosition.x = mCameraPosition.x + 5;
+    if (engine->GetKey(olc::Key::D).bHeld) mCameraPosition.x = mCameraPosition.x - 5;
+    if (engine->GetKey(olc::Key::W).bHeld) mCameraPosition.y = mCameraPosition.y + 5;
+    if (engine->GetKey(olc::Key::S).bHeld) mCameraPosition.y = mCameraPosition.y - 5;
+}
+
+void Dungeon::Draw()
 {
 	for ( auto& tile : mWorld )
 	{
-		tile.Draw( mEngine, cameraPosition );
+		tile.Draw( mEngine, &mCameraPosition );
 	}
 }
